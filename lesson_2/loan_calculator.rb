@@ -47,13 +47,7 @@ def interest_rate_conversion(apr)
 end
 
 def monthly_payment_calc(loan_amount, zero_interest, monthly_interest, loan_duration)
-  
-  p loan_amount
-  p zero_interest
-  p monthly_interest
-  p loan_duration
-  
-  if zero_interest == 0 
+  if zero_interest == 0
     monthly_payment = (loan_amount.to_f / loan_duration) 
   else 
     monthly_payment = loan_amount.to_f * (monthly_interest / (1 - ( 1 + monthly_interest)**(-loan_duration)))
@@ -68,63 +62,69 @@ name = gets.chomp
 prompt("Thank you #{name}, let's get started!")
 prompt("To use this calculator you will need the amount of your loan, the annual percentage rate, and how long the loan is for.")
 
-loan_amount = ''
-      
 loop do
-  prompt("What is your loan amount?")
-  loan_amount = gets.chomp
-  integer?(loan_amount) ? break : invalid_message?()
-end
-
-zero_interest = ''
-apr = ''
-monthly_interest = 
-
-loop do
-  prompt("What is the annual interest rate on your loan?")
-  prompt("Please enter in the format 5 for 5% or 5.5 for 5.5%.")
-  apr = gets.chomp
-  if apr == "0"
-    zero_interest = 0
-    break
-  elsif integer?(apr)
-    p monthly_interest = interest_rate_conversion(apr)
-    break
-  elsif
-    float?(apr)
-    p monthly_interest = interest_rate_conversion(apr)
-    break
-  else
-    invalid_message?()
-  end 
-end
-
-loan_duration = ''
-
-loop do
-  prompt("How long is your loan? (ex. 10)")
-  loan_duration = gets.chomp
-  integer?(loan_duration) ? break : invalid_message?()
-end
-
-loan_time = ''
-
-loop do
-  prompt("Is the length of your loan in years or months? m for month, y for years")
-  loan_time = gets.chomp.downcase
-  if loan_time == "m"
-    loan_duration = loan_duration.to_f
-    break
-  elsif loan_time == "y"
-    loan_duration = loan_duration.to_f * 12
-    break
-  else
-    invalid_message?()
+  loan_amount = ''
+        
+  loop do
+    prompt("What is your loan amount?")
+    loan_amount = gets.chomp
+    integer?(loan_amount) ? break : invalid_message?()
   end
-end
-
-payment = monthly_payment_calc(loan_amount, zero_interest, monthly_interest, loan_duration)
-
-puts("#{name}, for a loan amount of $#{loan_amount}, at an APR of #{monthly_interest.round(2)}, for #{loan_duration.to_i} months, your monthly payment is $#{payment.round(2)}.")
   
-
+  zero_interest = ''
+  apr = ''
+  monthly_interest = ''
+  
+  loop do
+    prompt("What is the annual interest rate on your loan?")
+    prompt("Please enter in the format 5 for 5% or 5.5 for 5.5%.")
+    apr = gets.chomp
+    if apr == "0"
+      zero_interest = 0
+      break
+    elsif integer?(apr)
+      monthly_interest = interest_rate_conversion(apr)
+      break
+    elsif
+      float?(apr)
+      monthly_interest = interest_rate_conversion(apr)
+      break
+    else
+      invalid_message?()
+    end 
+  end
+  
+  loan_duration = ''
+  
+  loop do
+    prompt("How long is your loan? (ex. 10)")
+    loan_duration = gets.chomp
+    integer?(loan_duration) ? break : invalid_message?()
+  end
+  
+  loan_time = ''
+  
+  loop do
+    prompt("Is the length of your loan in years or months? m for month, y for years")
+    loan_time = gets.chomp.downcase
+    if loan_time == "m"
+      loan_duration = loan_duration.to_f
+      break
+    elsif loan_time == "y"
+      loan_duration = loan_duration.to_f * 12
+      break
+    else
+      invalid_message?()
+    end
+  end
+  
+  payment = monthly_payment_calc(loan_amount, zero_interest, monthly_interest, loan_duration)
+  
+  prompt("#{name}, for a loan amount of $#{loan_amount}, at an APR of #{apr}%, for #{loan_duration.to_i} months, your monthly payment is $#{payment.round(2)}.")
+  
+  prompt("Would you like to calculate anouth loan? choose y for yes, or any other key to exit the program.")
+  answer = gets.chomp
+  break unless answer.downcase() == ('y')
+end
+    
+  
