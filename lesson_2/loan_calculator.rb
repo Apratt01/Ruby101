@@ -41,19 +41,27 @@ def invalid_message?()
   prompt("Sorry that is not a valid response, please try again.")
 end
 
-monthly_payment = ''
+def interest_rate_conversion(apr)
+  apr_percent = apr.to_f / 100
+  monthly_interest = apr_percent / 12
+end
 
 def monthly_payment_calc(loan_amount, zero_interest, monthly_interest, loan_duration)
   
-  p loan_amount.to_f
+  p loan_amount
+  p zero_interest
   p monthly_interest
   p loan_duration
   
-  zero_interest == 0 ? monthly_payment = (loan_amount / loan_duration) : monthly_payment = loan_amount* (monthly_interest / (1 - ( 1 + monthly_interest)**(-loan_duration)))
-  return monthly_payment.round(2)
+  if zero_interest == 0 
+    monthly_payment = (loan_amount.to_f / loan_duration) 
+  else 
+    monthly_payment = loan_amount.to_f * (monthly_interest / (1 - ( 1 + monthly_interest)**(-loan_duration)))
+  end
+  return monthly_payment
 end
-  
-prompt("Welcome the the loan calculator!")
+
+prompt("Welcome to the the loan calculator!")
 prompt("First, tell me your name?")
 name = gets.chomp
 
@@ -70,6 +78,7 @@ end
 
 zero_interest = ''
 apr = ''
+monthly_interest = 
 
 loop do
   prompt("What is the annual interest rate on your loan?")
@@ -79,17 +88,18 @@ loop do
     zero_interest = 0
     break
   elsif integer?(apr)
+    p monthly_interest = interest_rate_conversion(apr)
     break
   elsif
     float?(apr)
+    p monthly_interest = interest_rate_conversion(apr)
     break
   else
     invalid_message?()
   end 
 end
 
-apr_percent = apr.to_f / 100
-monthly_interest = apr_percent / 12
+loan_duration = ''
 
 loop do
   prompt("How long is your loan? (ex. 10)")
@@ -98,7 +108,6 @@ loop do
 end
 
 loan_time = ''
-loan_duration = ''
 
 loop do
   prompt("Is the length of your loan in years or months? m for month, y for years")
@@ -116,6 +125,6 @@ end
 
 payment = monthly_payment_calc(loan_amount, zero_interest, monthly_interest, loan_duration)
 
-puts("#{name}, for a loan amount of $#{loan_amount}, at an APR of #{interest_rate.round(2)}, for #{loan_duration.to_i} months, your monthly payment is $#{payment}.")
+puts("#{name}, for a loan amount of $#{loan_amount}, at an APR of #{monthly_interest.round(2)}, for #{loan_duration.to_i} months, your monthly payment is $#{payment.round(2)}.")
   
 
