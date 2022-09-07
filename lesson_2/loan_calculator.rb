@@ -25,6 +25,10 @@
 # Calculate monthly payment using m = p * (j / (1 - (1 + j)**(-n)))
 # END
 
+def prompt(message)
+  puts("=> #{message}")
+end
+
 def integer?(input)
   input.to_i.to_s == input
 end
@@ -33,68 +37,85 @@ def float?(input)
   input.to_f.to_s == input
 end
 
+def invalid_message?()
+  prompt("Sorry that is not a valid response, please try again.")
+end
+
+monthly_payment = ''
+
+def monthly_payment_calc(loan_amount, zero_interest, monthly_interest, loan_duration)
+  
+  p loan_amount.to_f
+  p monthly_interest
+  p loan_duration
+  
+  zero_interest == 0 ? monthly_payment = (loan_amount / loan_duration) : monthly_payment = loan_amount* (monthly_interest / (1 - ( 1 + monthly_interest)**(-loan_duration)))
+  return monthly_payment.round(2)
+end
+  
+prompt("Welcome the the loan calculator!")
+prompt("First, tell me your name?")
+name = gets.chomp
+
+prompt("Thank you #{name}, let's get started!")
+prompt("To use this calculator you will need the amount of your loan, the annual percentage rate, and how long the loan is for.")
+
 loan_amount = ''
-
+      
 loop do
-  puts ("What is your loan amount?")
+  prompt("What is your loan amount?")
   loan_amount = gets.chomp
-  if integer?(loan_amount)
-    loan_amount = loan_amount.to_i
-    break
-  else
-    puts("Sorry, that is not a number, please try again.")
-  end
+  integer?(loan_amount) ? break : invalid_message?()
 end
 
-annual_interest = ''
-monthly_interest = ''
+zero_interest = ''
+apr = ''
 
 loop do
-  puts ("What is the annual interest rate on your loan? ")
-  puts ("Please enter in the foramat 0.00, ie 5% would be 0.05.")
-  annual_interest = gets.chomp
-  if float?(annual_interest)
-    monthly_interest = annual_interest.to_f/12
+  prompt("What is the annual interest rate on your loan?")
+  prompt("Please enter in the format 5 for 5% or 5.5 for 5.5%.")
+  apr = gets.chomp
+  if apr == "0"
+    zero_interest = 0
+    break
+  elsif integer?(apr)
+    break
+  elsif
+    float?(apr)
     break
   else
-    puts("Sorry, that is not a valid interest rate, please try again.")
-  end
+    invalid_message?()
+  end 
 end
 
-loan_duration = ''
+apr_percent = apr.to_f / 100
+monthly_interest = apr_percent / 12
 
 loop do
-  puts("How long is your loan?")
+  prompt("How long is your loan? (ex. 10)")
   loan_duration = gets.chomp
-  if integer?(loan_duration)
-    break
-  else
-    puts("Sorry that is not a valid number, please try again")
-  end
+  integer?(loan_duration) ? break : invalid_message?()
 end
 
 loan_time = ''
-loan_duration_annual = ''
-loan_duration_month = ''
+loan_duration = ''
 
 loop do
-  puts("Is your loan in years or months? m for month, y for years")
+  prompt("Is the length of your loan in years or months? m for month, y for years")
   loan_time = gets.chomp.downcase
   if loan_time == "m"
-    loan_duration_month = loan_duration.to_i
-    p loan_duration_month
+    loan_duration = loan_duration.to_f
     break
   elsif loan_time == "y"
-    loan_duration_annual = loan_duration.to_i / 12
-    p loan_duration_annual
+    loan_duration = loan_duration.to_f * 12
     break
   else
-    puts("Sorry, that is not a valid selection, please try again")
+    invalid_message?()
   end
 end
 
-p loan_duration_annual
-p loan_duration_month
+payment = monthly_payment_calc(loan_amount, zero_interest, monthly_interest, loan_duration)
 
-#puts monthly_payment = loan_amount * (monthly_interest / (1 - (1 + monthly_interest)**(-loan_time)))
-#puts("For a loan of $#{loan_amount} at an interest rate of #{monthly_interest} for #{loan_time} months, your monthly payment is $#{monthly_payment}.")
+puts("#{name}, for a loan amount of $#{loan_amount}, at an APR of #{interest_rate.round(2)}, for #{loan_duration.to_i} months, your monthly payment is $#{payment}.")
+  
+
