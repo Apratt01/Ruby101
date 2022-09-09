@@ -11,7 +11,7 @@ time: Great, please enter how many.
 duration_month: |
   Is the length of your loan in months, or do you have additional months to add?
   (Please enter yes or no)
-time_error: You selected no for both years and months. The legnth of the loan is required. Please try again.
+time_error: You selected no for both years and months. The length of the loan is required. Please try again.
 again: |
   Would you like to calculate another loan?
   (choose y for yes, or any other key to exit the program.)

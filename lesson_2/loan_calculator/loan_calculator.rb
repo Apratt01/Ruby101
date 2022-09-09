@@ -1,8 +1,6 @@
 require 'yaml'
 MESSAGES = YAML.load_file('calculator_messages.yml')
 
-system("clear")
-
 MONTHS_IN_A_YEAR = 12
 
 def prompt(message)
@@ -41,6 +39,8 @@ def monthly_calc(apr, loan_amount, loan_duration)
 end
 
 prompt(MESSAGES['welcome'])
+
+system("clear")
 
 name = ''
 
@@ -147,11 +147,11 @@ loop do
 
   loan_duration = loan_time_calc(loan_month, loan_year)
   payment =
-    monthly_calc(apr, loan_month, loan_year, loan_amount, loan_duration)
+    monthly_calc(apr, loan_amount, loan_duration)
 
   prompt(
-    "#{name} for a loan amount of $#{loan_amount}
-    with an APR of #{apr.to_f}% for #{loan_duration.round(0)} months;
+    "#{name} for a loan amount of $#{loan_amount.round(2)}
+    with an APR of #{apr.to_f.round(2)}% for #{loan_duration.round(0)} months;
     the payment is $#{payment.round(2)}."
   )
 
