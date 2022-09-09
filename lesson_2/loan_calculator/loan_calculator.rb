@@ -29,9 +29,8 @@ def loan_time_calc(loan_month, loan_year)
   loan_year.to_f * MONTHS_IN_A_YEAR + loan_month.to_f
 end
 
-def monthly_calc(apr, loan_month, loan_year, loan_amount)
+def monthly_calc(apr, loan_amount, loan_duration)
   monthly_interest = interest_rate_conversion(apr)
-  loan_duration = loan_time_calc(loan_month, loan_year)
 
   if monthly_interest == 0
     (loan_amount.to_f / loan_duration.to_f)
@@ -86,39 +85,79 @@ loop do
   end
 
   loan_year = ''
-
-  loop do
-    prompt(MESSAGES['duration_year'])
-    loan_year = gets.chomp
-    if loan_year.downcase == 'x'
-      break
-    elsif valid_selection?(loan_year)
-      break
-    else
-      invalid_message?
-    end
-  end
-
   loan_month = ''
 
   loop do
-    prompt(MESSAGES['duration_month'])
-    loan_month = gets.chomp
-    if loan_month.downcase == 'x'
-      break
-    elsif valid_selection?(loan_month)
-      break
+    year_answer = ''
+    month_answer = ''
+
+    loop do
+      prompt(MESSAGES['duration_year'])
+      year_answer = gets.chomp.downcase
+      if (year_answer == 'no' || year_answer == 'n')\
+        || year_answer == 'yes' || year_answer == 'y'
+        break
+      else
+        invalid_message?
+      end
+    end
+
+    if year_answer == 'y' || year_answer == 'yes'
+      loop do
+        prompt(MESSAGES['time'])
+        loan_year = gets.chomp
+        if valid_selection?(loan_year)
+          break
+        else
+          invalid_message?
+        end
+      end
+    end
+
+    loop do
+      prompt(MESSAGES['duration_month'])
+      month_answer = gets.chomp.downcase
+      if (month_answer == 'no' || month_answer == 'n')\
+        || (month_answer == 'yes' || month_answer == 'y')
+        break
+      else
+        invalid_message?
+      end
+    end
+
+    if month_answer == 'yes' || month_answer == 'y'
+      loop do
+        prompt(MESSAGES['time'])
+        loan_month = gets.chomp
+        if valid_selection?(loan_month)
+          break
+        else
+          invalid_message?
+        end
+      end
+    end
+
+    if (year_answer == 'n' || year_answer == 'no')\
+      && (month_answer == 'n' || month_answer == 'no')
+      prompt(MESSAGES['time_error'])
     else
-      invalid_message?
+      break
     end
   end
 
+  loan_duration = loan_time_calc(loan_month, loan_year)
   payment =
-    monthly_calc(apr, loan_month, loan_year, loan_amount)
+    monthly_calc(apr, loan_month, loan_year, loan_amount, loan_duration)
 
-  prompt("#{name} your monthly payment is $#{payment.round(2)}.")
+  prompt(
+    "#{name} for a loan amount of $#{loan_amount}
+    with an APR of #{apr.to_f}% for #{loan_duration.round(0)} months;
+    the payment is $#{payment.round(2)}."
+  )
 
   prompt(MESSAGES['again'])
   answer = gets.chomp
   break unless answer.downcase() == ('y')
 end
+
+prompt(MESSAGES['goodbye'])

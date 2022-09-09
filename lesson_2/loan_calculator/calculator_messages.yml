@@ -5,11 +5,16 @@ needed: To use this calculator you will need the amount of your loan, the annual
 amount: What is your loan amount?
 interest: What is the annual interest rate on your loan?
 duration_year: |
-  How long is your loan in years?
-  (If the loan is in months, please enter 'x' to skip)
-duration_month: Please enter months, or additional months ('x' to skip.)
+  Is the length of your loan in years? 
+  (Please enter yes or no.)
+time: Great, please enter how many.
+duration_month: |
+  Is the length of your loan in months, or do you have additional months to add?
+  (Please enter yes or no)
+time_error: You selected no for both years and months. The legnth of the loan is required. Please try again.
 again: |
   Would you like to calculate another loan?
   (choose y for yes, or any other key to exit the program.)
+goodbye: Thank you for using the calculator.
 
   
