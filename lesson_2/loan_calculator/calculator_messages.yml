@@ -1,0 +1,15 @@
+invalid: Sorry that is not a valid response, please try again.
+welcome: Welcome to the Mortgage Calculator! 
+name: First, please tell me your name?
+needed: To use this calculator you will need the amount of your loan, the annual percentage rate, and how long the loan is for.
+amount: What is your loan amount?
+interest: What is the annual interest rate on your loan?
+duration_year: |
+  How long is your loan in years?
+  (If the loan is in months, please enter 'x' to skip)
+duration_month: Please enter months, or additional months ('x' to skip.)
+again: |
+  Would you like to calculate another loan?
+  (choose y for yes, or any other key to exit the program.)
+
+  

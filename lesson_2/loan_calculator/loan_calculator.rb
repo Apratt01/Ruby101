@@ -1,3 +1,8 @@
+require 'yaml'
+MESSAGES = YAML.load_file('calculator_messages.yml')
+
+system("clear")
+
 MONTHS_IN_A_YEAR = 12
 
 def prompt(message)
@@ -5,7 +10,7 @@ def prompt(message)
 end
 
 def invalid_message?
-  prompt("Sorry that is not a valid response, please try again.")
+  prompt(MESSAGES['invalid'])
 end
 
 def valid_selection?(input)
@@ -36,27 +41,40 @@ def monthly_calc(apr, loan_month, loan_year, loan_amount)
   end
 end
 
-prompt("Welcome to the the loan calculator!")
-prompt("First, tell me your name?")
-name = gets.chomp
+prompt(MESSAGES['welcome'])
+
+name = ''
+
+loop do
+  prompt((MESSAGES['name']))
+  name = gets.chomp.strip
+  if name == ''
+    invalid_message?
+  else
+    break
+  end
+end
 
 prompt("Thank you #{name}, let's get started!")
-prompt("To use this calculator you will need the amount of your loan,
-the annual percentage rate, and how long the loan is for.")
+prompt(MESSAGES['needed'])
 
 loop do
   loan_amount = ''
 
   loop do
-    prompt("What is your loan amount?")
+    prompt(MESSAGES['amount'])
     loan_amount = gets.chomp
-    valid_selection?(loan_amount) ? break : invalid_message?
+    if valid_selection?(loan_amount)
+      break
+    else
+      invalid_message?
+    end
   end
 
   apr = ''
 
   loop do
-    prompt("What is the annual interest rate on your loan?")
+    prompt(MESSAGES['interest'])
     apr = gets.chomp
     if apr == "0"
       break
@@ -68,9 +86,9 @@ loop do
   end
 
   loan_year = ''
+
   loop do
-    prompt("How long is your loan in years?
-    (If the loan is in months, please enter 'x' to skip)")
+    prompt(MESSAGES['duration_year'])
     loan_year = gets.chomp
     if loan_year.downcase == 'x'
       break
@@ -84,7 +102,7 @@ loop do
   loan_month = ''
 
   loop do
-    prompt("Please enter months, or additional months ('x' to skip.)")
+    prompt(MESSAGES['duration_month'])
     loan_month = gets.chomp
     if loan_month.downcase == 'x'
       break
@@ -100,8 +118,7 @@ loop do
 
   prompt("#{name} your monthly payment is $#{payment.round(2)}.")
 
-  prompt("Would you like to calculate anouth loan?
-  (choose y for yes, or any other key to exit the program.)")
+  prompt(MESSAGES['again'])
   answer = gets.chomp
   break unless answer.downcase() == ('y')
 end
