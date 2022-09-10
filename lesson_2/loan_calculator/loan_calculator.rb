@@ -148,11 +148,11 @@ loop do
   loan_duration = loan_time_calc(loan_month, loan_year)
   payment =
     monthly_calc(apr, loan_amount, loan_duration)
-
+  
   prompt(
-    "#{name} for a loan amount of $#{loan_amount.round(2)}
-    with an APR of #{apr.to_f.round(2)}% for #{loan_duration.round(0)} months;
-    the payment is $#{payment.round(2)}."
+    "#{name} for a loan amount of $#{'%0.2f' % loan_amount.to_f}
+    with an APR of #{'%0.2f' % apr.to_f}% for #{loan_duration.round(0)} months;
+    the payment is $#{'%0.2f' % payment}."
   )
 
   prompt(MESSAGES['again'])
