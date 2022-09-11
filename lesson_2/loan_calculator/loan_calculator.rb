@@ -12,7 +12,11 @@ def invalid_message?
 end
 
 def valid_selection?(input)
-  (input.to_i.to_s == input && input.to_i > 0) || (sprintf("%.02f", input) == input  && input.to_f > 0)
+  numeric?(input) && input.to_f > 0
+end
+
+def numeric?(input)
+  true if !!Float(input, exception: false)
 end
 
 def interest_rate_conversion(apr)
@@ -148,11 +152,12 @@ loop do
   loan_duration = loan_time_calc(loan_month, loan_year)
   payment =
     monthly_calc(apr, loan_amount, loan_duration)
-  
+
   prompt(
-    "#{name} for a loan amount of $#{'%0.2f' % loan_amount.to_f}
-    with an APR of #{'%0.2f' % apr.to_f}% for #{loan_duration.round(0)} months;
-    the payment is $#{'%0.2f' % payment}."
+    "#{name} for a loan amount of $#{format('%0.2f', loan_amount.to_f)}
+    with an APR of #{format('%0.2f', apr.to_f)}%,
+    for #{loan_duration.round(0)} months;
+    the payment is $#{format('%0.2f', payment)}."
   )
 
   prompt(MESSAGES['again'])
