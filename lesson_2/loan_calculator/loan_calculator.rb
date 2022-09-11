@@ -12,7 +12,7 @@ def invalid_message?
 end
 
 def valid_selection?(input)
-  (input.to_i.to_s == input || input.to_f.to_s == input) && input.to_f > 0
+  (input.to_i.to_s == input && input.to_i > 0) || (sprintf("%.02f", input) == input  && input.to_f > 0)
 end
 
 def interest_rate_conversion(apr)
