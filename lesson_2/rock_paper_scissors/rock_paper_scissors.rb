@@ -13,7 +13,7 @@ def prompt(message)
   puts("=> #{message}")
 end
 
-def invalid
+def invalid_message?
   prompt(MESSEGES['invalid'])
 end
 
@@ -42,7 +42,7 @@ end
 
 def random_choice
   arr = []
-  VALID_CHOICES.each do |value|
+  VALID_CHOICES.each do |key, value|
     arr << value
   end
   arr.sample
@@ -126,7 +126,7 @@ loop do
     prompt(MESSEGES['started'])
     break
   else
-    invalid
+    invalid_message?
   end
 end
 
@@ -153,7 +153,7 @@ loop do
   answer = gets.chomp
 
   break unless answer.downcase.start_with?('y')
-
+  
   prompt(MESSEGES['rules_again'])
   answer = gets.chomp.downcase
   if answer == 'y' || answer == 'yes'
