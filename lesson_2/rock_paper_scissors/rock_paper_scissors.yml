@@ -1,0 +1,35 @@
+invalid: That is not a valid choice, please try again.
+tie: No one is winning yet! The game is tied!
+player_wins: You are the winner with 3 wins to the computer's
+computer_wins: The computer wins with 3 wins to your
+welcome: welcome to the rock, paper, scissors, spock, and lizard game!
+name: Hello! What is your name?
+rules: Would you like to read the rules before we start playing?
+rules_listed: |
+  
+  
+  This game is an expansion on the original game Rock, Paper, Scissors.
+  Each player makes a choice.
+  The winner is decided by comparing the two choices. (see below)
+  In a tie, the process is repeated until a winner is found.
+  
+  The choices are decided this way:
+    - Scissors cuts paper. Paper covers rock.
+    - Rock crushes lizard. Lizard poisons Spock.
+    - Spock smashes scissors. Scissors decapitates lizard.
+    - Lizard eats paper. Paper disproves Spock.
+    - Spock vaporizes rock. Rock crushes scissors.
+    
+
+started: Ok, let's get started!
+rules_again: Would you like to see the list of rules again?
+
+short_rules: |
+  The choices are decided this way:
+    - Scissors cuts paper. Paper covers rock.
+    - Rock crushes lizard. Lizard poisons Spock.
+    - Spock smashes scissors. Scissors decapitates lizard.
+    - Lizard eats paper. Paper disproves Spock.
+    - Spock vaporizes rock. Rock crushes scissors.
+    
+play_again: Do you want to play again? (y or any key to quit)
