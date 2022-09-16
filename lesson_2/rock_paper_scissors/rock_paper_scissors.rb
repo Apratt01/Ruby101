@@ -1,26 +1,26 @@
 require 'yaml'
 MESSEGES = YAML.load_file('rock_paper_scissors.yml')
 
-VALID_CHOICES = {"r" => 'rock', "p" => 'paper', 
-                "sc" => 'scissors', "sp" => 'spock', "l" => 'lizard'}
-WINS = {"rock" => ['scissors', 'lizard'],
-        "paper" => ['rock', 'spock'],
-        "scissors" => ['paper', 'lizard'],
-        "spock" => ['scisors', 'rock'],
-        "lizard" => ['spock', 'paper']}
+VALID_CHOICES = { "r" => 'rock', "p" => 'paper',
+                  "sc" => 'scissors', "sp" => 'spock', "l" => 'lizard' }
+WINS = { "rock" => ['scissors', 'lizard'],
+         "paper" => ['rock', 'spock'],
+         "scissors" => ['paper', 'lizard'],
+         "spock" => ['scisors', 'rock'],
+         "lizard" => ['spock', 'paper'] }
 
 def prompt(message)
   puts("=> #{message}")
 end
 
 def invalid()
-    prompt(MESSEGES['invalid'])
+  prompt(MESSEGES['invalid'])
 end
 
 def select_choice()
-    show_choices()
-    player_choice_abbr = gets.chomp.downcase
-    valid_selection?(player_choice_abbr)
+  show_choices()
+  player_choice_abbr = gets.chomp.downcase
+  valid_selection?(player_choice_abbr)
 end
 
 def show_choices()
@@ -32,14 +32,14 @@ end
 def valid_selection?(choice)
   if VALID_CHOICES.key?(choice)
     VALID_CHOICES[choice]
-  elsif VALID_CHOICES.has_value?(choice)
+  elsif VALID_CHOICES.value?(choice)
     choice
   else
     prompt(MESSEGES['invalid'])
     select_choice()
   end
 end
-    
+
 def random_choice()
   arr = []
   VALID_CHOICES.each do |key, value|
@@ -59,7 +59,7 @@ end
 
 def computer_win?(player, computer)
   computer_choice = WINS.fetch(computer)
-  computer_choice.include?(computer)
+  computer_choice.include?(player)
 end
 
 def win?(player, computer)
@@ -69,7 +69,7 @@ def win?(player, computer)
     0
   end
 end
-  
+
 def display_result(player, computer)
   if player == computer
     prompt("It's a tie!")
@@ -88,7 +88,7 @@ def tally(player, computer)
     prompt("Computer is winning #{computer} to #{player}.")
     puts ''
   elsif (player < 3 && computer < 3) && (player == computer)
-    prompt("#{MESSEGES['tie']}")
+    prompt(MESSEGES['tie'])
     prompt("You each have #{player} wins.")
     puts ''
   else
@@ -140,7 +140,7 @@ end
 loop do
   player_count = 0
   computer_count = 0
-  
+
   loop do
     choice = select_choice()
     computer_choice = random_choice()
@@ -155,16 +155,15 @@ loop do
       break
     end
   end
-  
+
   prompt("Do you want to play again?")
   answer = gets.chomp
-  
+
   break unless answer.downcase.start_with?('y')
-  
+
   loop do
     prompt(MESSEGES['rules_again'])
     answer = gets.chomp.downcase
-    p answer
     if answer == 'y' || answer == 'yes'
       prompt(MESSEGES['short_rules'])
       break
