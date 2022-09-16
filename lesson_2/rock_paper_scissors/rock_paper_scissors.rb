@@ -42,7 +42,7 @@ end
 
 def random_choice
   arr = []
-  VALID_CHOICES.each do |key, value|
+  VALID_CHOICES.each do |_key, value|
     arr << value
   end
   arr.sample
@@ -153,7 +153,7 @@ loop do
   answer = gets.chomp
 
   break unless answer.downcase.start_with?('y')
-  
+
   prompt(MESSEGES['rules_again'])
   answer = gets.chomp.downcase
   if answer == 'y' || answer == 'yes'
