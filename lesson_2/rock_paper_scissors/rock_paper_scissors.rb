@@ -13,17 +13,17 @@ def prompt(message)
   puts("=> #{message}")
 end
 
-def invalid()
+def invalid
   prompt(MESSEGES['invalid'])
 end
 
-def select_choice()
-  show_choices()
+def select_choice
+  show_choices
   player_choice_abbr = gets.chomp.downcase
   valid_selection?(player_choice_abbr)
 end
 
-def show_choices()
+def show_choices
   VALID_CHOICES.each do |key, value|
     prompt("Please choose #{key} or #{value}")
   end
@@ -36,13 +36,13 @@ def valid_selection?(choice)
     choice
   else
     prompt(MESSEGES['invalid'])
-    select_choice()
+    select_choice
   end
 end
 
-def random_choice()
+def random_choice
   arr = []
-  VALID_CHOICES.each do |key, value|
+  VALID_CHOICES.each do |value|
     arr << value
   end
   arr.sample
@@ -81,18 +81,13 @@ def display_result(player, computer)
 end
 
 def tally(player, computer)
-  if (player < 3 && computer < 3) && (player > computer)
+  if player > computer
     prompt("You are winning #{player} to #{computer}.")
-    puts ''
-  elsif (player < 3 && computer < 3) && (player < computer)
+  elsif player < computer
     prompt("Computer is winning #{computer} to #{player}.")
-    puts ''
-  elsif (player < 3 && computer < 3) && (player == computer)
+  else
     prompt(MESSEGES['tie'])
     prompt("You each have #{player} wins.")
-    puts ''
-  else
-    announce_winner(player, computer)
   end
 end
 
@@ -126,14 +121,12 @@ loop do
   if rules == 'y' || rules == 'yes'
     prompt(MESSEGES['rules_listed'])
     prompt(MESSEGES['started'])
-    puts ''
     break
   elsif rules == 'n' || rules == 'no'
     prompt(MESSEGES['started'])
-    puts ''
     break
   else
-    invalid()
+    invalid
   end
 end
 
@@ -142,16 +135,16 @@ loop do
   computer_count = 0
 
   loop do
-    choice = select_choice()
-    computer_choice = random_choice()
+    choice = select_choice
+    computer_choice = random_choice
     print_choices(choice, computer_choice)
-    puts ''
     display_result(choice, computer_choice)
-    puts ''
     player_count += win?(choice, computer_choice)
     computer_count += win?(computer_choice, choice)
-    tally(player_count, computer_count)
-    if player_count == 3 || computer_count == 3
+    if player_count != 3 && computer_count != 3
+      tally(player_count, computer_count)
+    else
+      announce_winner(player_count, computer_count)
       break
     end
   end
@@ -161,15 +154,13 @@ loop do
 
   break unless answer.downcase.start_with?('y')
 
-  loop do
-    prompt(MESSEGES['rules_again'])
-    answer = gets.chomp.downcase
-    if answer == 'y' || answer == 'yes'
-      prompt(MESSEGES['short_rules'])
-      break
-    else
-      break
-    end
+  prompt(MESSEGES['rules_again'])
+  answer = gets.chomp.downcase
+  if answer == 'y' || answer == 'yes'
+    prompt(MESSEGES['short_rules'])
+    prompt("Ok, #{name} let's play again!")
+  else
+    prompt("Ok #{name} let's play again!")
   end
 end
 
