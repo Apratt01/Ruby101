@@ -1,0 +1,25 @@
+1. what is != and where should you use it?
+
+    # this is a logical operator. It means not equal, and you would use it to compare.
+
+2, put ! before something, like !user_name
+
+    # assigns the value not to the variable
+
+3. put ! after something, like words.uniq!
+
+    This will change a non mutating method into a mutating method in certain cases.
+    It is part of the method name and is undetermined without testing or reading the docs.
+    
+4. put ? before something
+  
+    # This is used in ternary if/else statements ? :
+    
+5. put ? after something
+
+    # This is commonly used in methods to identify that the method returns a boolean.
+    # But that is a style choice, not Ruby Syntax.
+    
+6. put !! before something, like !!user_name
+
+    # !!<some object> is used to turn any object into their boolean equivalent. (Try it in irb)
