@@ -19,6 +19,27 @@ def digit_list(number)
     end 
 end
 
+#alternative
+
+def digit_list(number)
+  number.to_s.chars.map { |char| char.to_i }
+end 
+
+#alternative
+def digit_list(number)
+  digits = []
+  loop do
+    number, remainder = number.divmod(10)
+    digits.unshift(remainder)
+    break if number == 0
+  end
+  digits
+end
+
+#alternative
+def digit_list(number)
+  number.to_s.chars.map(&:to_i)
+end
 
 puts digit_list(12345) == [1, 2, 3, 4, 5]     # => true
 puts digit_list(7) == [7]                     # => true

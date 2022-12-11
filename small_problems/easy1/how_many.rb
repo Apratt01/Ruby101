@@ -38,6 +38,22 @@ def count_occurrences(array)
   end
 end
   
+#alternative
+def count_occurrences(array)
+  count = 1
+  total = {}
+  array.each do |i|
+    if total.key?(i)
+      total[i] += count
+    else
+      total[i] = count
+    end 
+  end
+  total.each do |key, value|
+    puts "#{key} => #{value}"
+  end 
+end
+  
 count_occurrences(vehicles)
       
 

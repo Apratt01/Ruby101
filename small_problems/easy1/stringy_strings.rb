@@ -27,6 +27,17 @@ def stringy(size)
   numbers.join
 end
 
+#alternative
+
+def stringy(number)
+  word = ''
+  count = 0
+  while count < number
+    count.odd? ? word << '0' : word << '1'
+    count += 1
+  end 
+  word
+end 
 
 puts stringy(6) == '101010'
 puts stringy(9) == '101010101'

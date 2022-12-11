@@ -44,7 +44,7 @@ The method's return value will determine puts
 
 =end
 
-def number(list_of_numbers, number_to_check)
+def number?(list_of_numbers, number_to_check)
   list_of_numbers.include?(number_to_check)
 end
 
@@ -63,7 +63,7 @@ arr << gets.chomp.to_i
 puts "Enter the last number:"
 num = gets.chomp.to_i
 
-if number(arr, num)
+if number?(arr, num)
   puts "The number #{num} appears in #{arr}."
 else
   puts "The number #{num} does not appear in #{arr}."

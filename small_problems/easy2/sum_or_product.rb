@@ -28,27 +28,30 @@ The product of the integers between 1 and 6 is 720.
 
 =end
 
-puts "Please enter an integer great than 0: "
-last = gets.chomp.to_i
+def sum_of_numbers(number)
+  (1..number).inject(:+)
+end
 
-puts "Enter 's' to compute the sum, 'p' to compute the product. "
-type = gets.chomp
+def product_of_numbers(number)
+  (1..number).inject(:*)
+end 
 
-temps = 1
-tempp = 1
-(2..last).each do |num|
-  if type == 's'
-    temps += num
+loop do  
+  puts "Please enter an integer greater than 0: "
+  num = gets.chomp.to_i
+  puts "Enter 's' to compute the sum, 'p' to compute the product. "
+  choice = gets.chomp.downcase
+
+  if choice == 's'
+    sum = sum_of_numbers(num)
+    puts "The sum of the integers between 1 and #{num} is #{sum}."
+  elsif choice == 'p'
+    product = product_of_numbers(num)
+    puts "The product of the integers between 1 and #{num} is #{product}."
   else
-    tempp *= num
-  end 
+    puts "That is an invalid selection."
+    break
+  end
 end 
-
-if type == 's'
-  puts "The sum of the integers between 1 and #{last} is #{temps}."
-else 
-  puts "The product of the integers between 1 and #{last} is #{tempp}."
-end 
-
 
 

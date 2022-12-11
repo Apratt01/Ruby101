@@ -22,6 +22,13 @@ def real_palindrome?(strings)
   palindrome?(clean)
 end 
 
+#alternative
+
+def real_palindrome?(string)
+  string = string.downcase.delete('^a-z0-9')
+  palindrome?(string)
+end
+
   
 puts real_palindrome?('madam') == true
 puts real_palindrome?('Madam') == true           # (case does not matter)

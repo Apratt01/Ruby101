@@ -1,0 +1,22 @@
+List of problems to repeat and work on
+  Ruby 101 
+    Easy 1
+      Odd - done
+      List of Digits - done
+      How Many? - done
+      Reverse It Part 1 - done
+      Reverse It Part 2 - done
+    Easy 3
+      Counting the Number of Characters - done
+      Squaring an argument - done
+      Palindromic Strings - done
+      Palindromic Strings Part 2 - done
+    Easy 4
+      Short Long Short - done
+      Leap Year Part 1 - done
+      Convert a String to a Number
+      Convert a String to a Signed Number Done
+      Convert a Number to a String
+      Convert a Signed Number to a String Done
+    Easy 5
+      alphatbetical numbers
